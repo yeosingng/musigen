@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-/react-backend/node_modules
+/src/react-backend/node_modules
 
 # testing
 /coverage
