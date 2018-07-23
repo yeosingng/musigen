@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './stylesheets/Sidebar.css';
 
 class Sidebar extends Component {
 
@@ -10,9 +11,11 @@ class Sidebar extends Component {
     return (
       <div id='sidebar'>
         <div id='sidebar_container'>
-          <div className='sidebar_selection'>YOUR MUSIC</div>
-          <div className='sidebar_selection'>GENERATE</div>
-          <div className='sidebar_selection'>TAG</div>
+          <div id='all_music_button'>MUSIC</div>
+          <div id='sidebar_tags'>
+          </div>
+          <div id='sidebar_playlists'>
+          </div>
         </div>
         <div id='sidebar_divider'></div>
       </div>

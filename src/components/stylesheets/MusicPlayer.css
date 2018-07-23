@@ -1,0 +1,95 @@
+#music_player {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 30px 30px 30px;
+}
+
+#music_headers {
+  display: flex;
+  flex-grow: 1;
+  margin-top: 20px;
+  border-bottom: 3px solid #b9c0cc;
+  font-size: 20px;
+  padding: 0px 10px 5px 10px;
+}
+
+#player_options {
+  flex-grow: 1;
+  margin-top: 11px;
+}
+
+#create_tag_button {
+  flex-basis: 10%;
+  margin-right: 50px;
+}
+
+#song_container {
+  color: #b9c0cc;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#header_space {
+  flex-basis: 10%;
+}
+
+#player_options {
+  display: flex;
+  flex-grow: 1;
+
+}
+
+#filter {
+    flex-grow: 5;
+}
+
+#sort {
+  flex-grow: 5;
+}
+
+#filter_text {
+  color: #b9c0cc;
+}
+
+#sort_text {
+  color: #b9c0cc;
+}
+
+.main_header {
+  flex-basis: 30%;
+  color: #b9c0cc;
+}
+
+.song {
+  padding: 10px 10px 0px 10px;
+  display: flex;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #b9c0cc;
+}
+
+.play_button {
+  flex-basis: 5%;
+}
+
+.tag_button {
+  flex-basis: 5%;
+}
+
+.song_name {
+  flex-basis: 30%;
+}
+
+.song_album {
+  flex-basis: 30%;
+}
+
+.song_artist {
+  flex-basis: 30%;
+}
+
+.header {
+  flex-grow: 1;
+  color: #b9c0cc;
+  margin-left:
+}

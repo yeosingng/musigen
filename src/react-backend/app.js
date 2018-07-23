@@ -8,7 +8,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var client_id = '9bae9682702d48a68ec9e2c4bdd40dcc';
-var client_secret = 'f6721ee1b0e54a8192411a09613060a4';
+var client_secret = '';
 var redirect_uri = 'http://localhost:8888/callback';
 
 var SpotifyWebApi = require('spotify-web-api-node');
@@ -63,7 +63,7 @@ app.get('/login', function(req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = 'user-read-private user-read-email';
+  var scope = 'user-read-private user-read-email user-library-read';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -166,7 +166,19 @@ app.post('/user', function (req, res) {
   spotifyApi.setAccessToken(req.body.access_token);
   spotifyApi.getMe()
   .then(function(data) {
-    console.log('Some information about the authenticated user', data.body);
+    res.json(data.body);
+  }, function(err) {
+    console.log('Something went wrong!', err);
+  });
+});
+
+app.post('/tracks', function (req, res) {
+  spotifyApi.setAccessToken(req.body.access_token);
+  spotifyApi.getMySavedTracks({
+    limit: 20
+  })
+  .then(function(data) {
+    console.log('Some tracks', data.body);
     res.json(data.body);
   }, function(err) {
     console.log('Something went wrong!', err);

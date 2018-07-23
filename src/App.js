@@ -4,6 +4,7 @@ import './App.css';
 import LoginPage from './components/LoginPage';
 import Sidebar from './components/Sidebar';
 import MainDisplay from './components/MainDisplay';
+import Header from './components/Header';
 
 import {getUser} from './api.js';
 
@@ -60,10 +61,7 @@ class App extends Component {
 
     return (
       <div id="parent">
-        <div id='header'>
-            <div id='main_title'>MUSI<span id="zonespan">GEN</span></div>
-            <div id='about'>ABOUT</div>
-        </div>
+        <Header />
         <div id='header_sep'></div>
         {main_display}
      </div>

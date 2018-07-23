@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import './stylesheets/MainDisplay.css';
+import MusicPlayer from './MusicPlayer';
 
 class MainDisplay extends Component {
-  constructor(props){
-    super(props);
-  }
-
   render(){
     return (
       <div id='main_display'>
-        <div id='intro_text'>You are logged in </div>
+        <MusicPlayer appState={this.props.appState}/>
       </div>
     );
   }
