@@ -23,7 +23,7 @@ export function getUser(access_token){
   });
 };
 
-export function getSavedTracks(access_token){
+export function getSavedTracks(access_token, offset){
   return fetch('/tracks',
   {
     headers: {
@@ -31,7 +31,7 @@ export function getSavedTracks(access_token){
       'Content-Type': 'application/json'
     },
     method: "POST",
-    body: JSON.stringify({access_token: access_token})
+    body: JSON.stringify({access_token: access_token, offset: offset})
   })
   .then(
     function(response) {
@@ -40,6 +40,7 @@ export function getSavedTracks(access_token){
           response.status);
         return;
       }
+
       return response.json();
     }
   )

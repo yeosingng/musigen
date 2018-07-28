@@ -175,7 +175,8 @@ app.post('/user', function (req, res) {
 app.post('/tracks', function (req, res) {
   spotifyApi.setAccessToken(req.body.access_token);
   spotifyApi.getMySavedTracks({
-    limit: 20
+    limit: 20,
+    offset: req.body.offset
   })
   .then(function(data) {
     console.log('Some tracks', data.body);
