@@ -15,12 +15,9 @@ YELLOW: #f3ff54
 
 #app_space {
   display: flex;
-  flex-grow: 2;
 }
 
-#main_display {
-  flex-grow: 9;
-}
+
 
 #parent {
   background-color: #262728;

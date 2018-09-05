@@ -9,40 +9,53 @@ class MusicPlayer extends Component {
     this.state = {
       tracks: [],
       hasMoreItems: true,
-      offset: 0
+      offset: 0,
+      requestOngoing: false
     };
     this.loadMore = this.loadMore.bind(this);
   }
 
   loadMore(page) {
-    getSavedTracks(this.props.appState.access_token, this.state.offset)
-    .then(data => {
-      var currTracks = this.state.tracks;
-      var newTracks = currTracks.concat(data.items);
-      if (data.next) {
-        this.setState({
-          tracks: newTracks,
-          offset: this.state.offset + 20
-        });
-      } else {
-        this.setState({
-          hasMoreItems: false
-        });
-      }
-    });
+    if (!this.state.requestOngoing){
+      this.setState({
+        requestOngoing: true
+      });
+      getSavedTracks(this.props.appState.access_token, this.state.offset)
+      .then(data => {
+        var currTracks = this.state.tracks;
+        var newTracks = currTracks.concat(data.items);
+        console.log(newTracks);
+        if (data.next) {
+          this.setState({
+            tracks: newTracks,
+            offset: this.state.offset + 20,
+            requestOngoing: false
+          });
+        } else {
+          this.setState({
+            hasMoreItems: false,
+            requestOngoing: false
+          });
+        }
+      });
+    }
   }
 
   render(){
     const loader = <div id='song_container'>Loading ... </div>;
     var items = [];
-    this.state.tracks.map((song, i) => {
+    this.state.tracks.map((song) => {
       items.push(
-        <div className='song' key={i}>
+        <div className='song'>
           <div className='play_button'>PLAY</div>
           <div className='tag_button'>TAG</div>
-          <div className='song_name'>{song.track.name}</div>
-          <div className='song_artist'>{song.track.artists[0].name}</div>
-          <div className='song_album'>{song.track.album.name}</div>
+          <div className='song_name_container'>
+            <div className='song_name'>{song.track.name}</div>
+          </div>
+          <div className='song_artist'>{song.track.artists.map((artist) => artist.name).join(', ')}</div>
+          <div className='album_name_container'>
+            <div className='song_album'>{song.track.album.name}</div>
+          </div>
         </div>
       );
     });
@@ -69,7 +82,6 @@ class MusicPlayer extends Component {
           pageStart={0}
           loadMore={this.loadMore}
           hasMore={this.state.hasMoreItems}
-          useWindow={false}
           loader={loader}
         >
         {items}
