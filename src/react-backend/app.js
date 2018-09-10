@@ -7,8 +7,31 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// --------------------[Database]---------------------------
+
+var MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://localhost:27017';
+const dbName = "musigen";
+
+MongoClient.connect(url, { useNewUrlParser: true},  function (err, client) {
+  if (err) throw err;
+  console.log("Connected to server, err");
+
+  var db = client.db(dbName);
+
+  db.collection('tracks').findOne({}, function (findErr, result) {
+    if (findErr) throw findErr;
+    console.log(result.user);
+    client.close();
+  });
+});
+
+
+
+// --------------------[Spotify API]------------------------
+
 var client_id = '9bae9682702d48a68ec9e2c4bdd40dcc';
-var client_secret = '';
+var client_secret = '4c8008d1e6db45b1ac1b84031a3d032f';
 var redirect_uri = 'http://localhost:8888/callback';
 
 var SpotifyWebApi = require('spotify-web-api-node');
@@ -17,6 +40,8 @@ var spotifyApi = new SpotifyWebApi({
   clientSecret: client_secret,
   redirectUri: 'http://localhost:8888/callback'
 });
+
+// ---------------------------------------------------------
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -179,8 +204,10 @@ app.post('/tracks', function (req, res) {
     offset: req.body.offset
   })
   .then(function(data) {
-    console.log('Some tracks', data.body);
-    res.json(data.body);
+    var tracks = data.body;
+    console.log(tracks);
+    res.json(tracks);
+
   }, function(err) {
     console.log('Something went wrong!', err);
   });
